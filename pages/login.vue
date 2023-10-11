@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import getAuthLink from '../utils/discordAuth';
+import { getAuthLink } from "../utils/discordAuth";
 
-  const loginHref = getAuthLink()
+const loginHref = getAuthLink();
 </script>
 
 <template>
