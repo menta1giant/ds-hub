@@ -1,5 +1,5 @@
-//const REDIRECT_URL = 'https://ds-hub.vercel.app/auth/discord'
-const REDIRECT_URL = process.env.REDIRECT_URL!;
+const config = useRuntimeConfig();
+const REDIRECT_URL = config.public.REDIRECT_URL as string;
 
 const PROPS = {
   client_id: "1161273721026261115",

@@ -4,8 +4,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     SECRET_CODE: process.env.SECRET_CODE,
     CLIENT_ID: process.env.CLIENT_ID,
-    REDIRECT_URL: process.env.REDIRECT_URL,
     public: {
+      REDIRECT_URL: process.env.REDIRECT_URL,
       SOCKETS: process.env.SOCKETS
     }
   },
