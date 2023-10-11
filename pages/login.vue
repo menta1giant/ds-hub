@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { getAuthLink } from "../utils/discordAuth";
+const config = useRuntimeConfig();
 
-const loginHref = getAuthLink();
+const loginHref = getAuthLink(config.public.REDIRECT_URL);
 </script>
 
 <template>

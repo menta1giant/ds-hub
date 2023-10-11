@@ -3,8 +3,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   console.log('i\'m middleware')
 
   const userDataStore = useUserData();
+  console.log(to.path);
 
-  if (!userDataStore.$state.userData.name && to.path !== '/login') {
+  if (!userDataStore.$state.userData.name && to.path === '/socket') {
     if (!getAuthToken()) {
       return navigateTo('/login')
     } 

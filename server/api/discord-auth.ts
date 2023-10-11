@@ -1,5 +1,3 @@
-import { useFetch } from "nuxt/app";
-
 const discordFetchUserDataUrl = "https://discord.com/api/oauth2/token";
 
 const getDiscordUserInfoFetchParams = (code: string) => {
