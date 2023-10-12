@@ -2,8 +2,12 @@ function setAuthToken(token: string) {
   setCookie("authToken", token, 30);
 }
 
-export function getAuthToken() {
+function getAuthToken() {
   return getCookie("authToken");
+}
+
+export function isAuthenticationTokenAssigned() {
+  return !!getAuthToken();
 }
 
 export async function setUserData() {

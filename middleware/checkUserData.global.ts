@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const userDataStore = useUserData();
 
   if (!userDataStore.$state.userData.name && to.path === "/socket") {
-    if (!getAuthToken()) {
+    if (!isAuthenticationTokenAssigned()) {
       return navigateTo("/login");
     }
 
