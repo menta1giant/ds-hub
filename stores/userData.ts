@@ -1,13 +1,13 @@
-export const useUserData = defineStore('userData', {
+export const useUserData = defineStore("userData", {
   state: () => ({
-    userData: {} as User
+    userData: {} as User,
   }),
 
   actions: {
-    setUserData(data:User) {
+    setUserData(data: User) {
       this.$patch((state) => {
         state.userData = data;
-      })
-    }
+      });
+    },
   },
-})
+});

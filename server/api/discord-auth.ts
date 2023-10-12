@@ -7,7 +7,10 @@ const getDiscordUserInfoFetchParams = (code: string) => {
   formdata.append("client_secret", config.SECRET_CODE);
   formdata.append("grant_type", "authorization_code");
   formdata.append("code", code);
-  formdata.append("redirect_uri", encodeURI(config.public.REDIRECT_URL as string));
+  formdata.append(
+    "redirect_uri",
+    encodeURI(config.public.REDIRECT_URL as string),
+  );
 
   return formdata;
 };

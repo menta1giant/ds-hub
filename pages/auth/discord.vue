@@ -3,20 +3,21 @@ import { DiscordRepo } from "~/utils/discord";
 
 const route = useRoute();
 const router = useRouter();
-const data = ref<{username?:string}>({});
+const data = ref<{ username?: string }>({});
 
 onMounted(async () => {
   await AuthRepo.discordAuth(route.query.code as string);
 
-  const userData = await DiscordRepo.getUserData() as Object;
+  const userData = (await DiscordRepo.getUserData()) as Object;
   data.value = userData;
 
-  const userDataStore = useUserData()
-  userDataStore.setUserData(formatUserData(userData as User))
+  const userDataStore = useUserData();
+  userDataStore.setUserData(formatUserData(userData as User));
 
-  router.push('/socket')
-
+  router.push("/socket");
 });
 </script>
 
-<template>{{ data?.username }}</template>
+<template>
+  <div>{{ data?.username }}</div>
+</template>

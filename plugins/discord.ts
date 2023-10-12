@@ -1,14 +1,14 @@
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
   return {
     provide: {
-      discordFetch: (token:string) => {
+      discordFetch: (token: string) => {
         return $fetch.create({
-          baseURL: 'https://discord.com/api',
+          baseURL: "https://discord.com/api",
           headers: {
-            Authorization: token
-          }
-        })
-      }
-    }
-  }
-})
+            Authorization: token,
+          },
+        });
+      },
+    },
+  };
+});

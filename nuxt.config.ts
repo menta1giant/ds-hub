@@ -6,15 +6,15 @@ export default defineNuxtConfig({
     CLIENT_ID: process.env.CLIENT_ID,
     public: {
       REDIRECT_URL: process.env.REDIRECT_URL,
-      SOCKETS: process.env.SOCKETS
-    }
+      SOCKETS: process.env.SOCKETS,
+    },
   },
-  modules: ['@pinia/nuxt'],
+  modules: ["@pinia/nuxt"],
   imports: {
-    dirs: ['./stores', './types'],
+    dirs: ["./stores", "./types"],
   },
 
   pinia: {
-    autoImports: ['defineStore'],
+    autoImports: ["defineStore"],
   },
 });

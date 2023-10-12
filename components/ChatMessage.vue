@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import type { ChatMessage } from '../types/chatMessage';
+import type { ChatMessage } from "../types/chatMessage";
 
-const props = defineProps<ChatMessage>()
+const props = defineProps<ChatMessage>();
 </script>
 
 <template>
-  <div class="message" :class="{'message--sent': props.isMe}">
+  <div class="message" :class="{ 'message--sent': props.isMe }">
     <div>
       <span class="message__name">{{ props.name }}</span>
       <p>{{ props.message }}</p>
     </div>
-    <img :src="props.avatar" width="64" height="64"/>
+    <img :src="props.avatar" width="64" height="64" />
   </div>
-
 </template>
 
 <style lang="scss" scoped>
 .message {
   display: flex;
   justify-content: flex-end;
-  gap: .75rem;
+  gap: 0.75rem;
 
   margin: 5px;
   padding: 10px;
@@ -36,7 +35,7 @@ const props = defineProps<ChatMessage>()
   &__name {
     font-weight: 500;
     font-size: 1.2em;
-    color: var(--username-color)
+    color: var(--username-color);
   }
 
   &--sent {

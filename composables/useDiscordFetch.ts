@@ -1,7 +1,5 @@
 export const useDiscordFetch = () => {
-  const token = getCookie('authToken')
-  const nuxtApp = useNuxtApp()
-  return token ?
-    nuxtApp.$discordFetch(token) :
-    $fetch
-}
+  const token = getCookie("authToken");
+  const nuxtApp = useNuxtApp();
+  return token ? nuxtApp.$discordFetch(token) : $fetch;
+};

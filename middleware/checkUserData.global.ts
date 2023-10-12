@@ -1,15 +1,13 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (process.server) return
-  console.log('i\'m middleware')
+export default defineNuxtRouteMiddleware(async (to) => {
+  if (process.server) return;
 
   const userDataStore = useUserData();
-  console.log(to.path);
 
-  if (!userDataStore.$state.userData.name && to.path === '/socket') {
+  if (!userDataStore.$state.userData.name && to.path === "/socket") {
     if (!getAuthToken()) {
-      return navigateTo('/login')
-    } 
-    console.log('gettin')
+      return navigateTo("/login");
+    }
+
     await setUserData();
   }
 });
