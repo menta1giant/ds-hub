@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { DiscordRepo } from "~/utils/discord";
-
 const route = useRoute();
 const router = useRouter();
 const data = ref<{ username?: string }>({});

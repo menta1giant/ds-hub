@@ -24,7 +24,7 @@ export const getAuthLink = (redirectUri: string) => {
 };
 
 export const DiscordRepo = {
-  async getUserData() {
+  async getUserData():User {
     return await useDiscordFetch()("/users/@me");
   },
 };

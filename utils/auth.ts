@@ -12,9 +12,9 @@ export function isAuthenticationTokenAssigned() {
 
 export async function setUserData() {
   const userDataStore = useUserData();
-  const userData = (await DiscordRepo.getUserData()) as Object;
+  const userData:User = await DiscordRepo.getUserData();
 
-  userDataStore.setUserData(formatUserData(userData as User));
+  userDataStore.setUserData(formatUserData(userData));
 }
 
 export const AuthRepo = {
