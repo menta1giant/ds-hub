@@ -1,4 +1,6 @@
 <script setup lang="ts">
+//TODO Refactor component
+
 import { io } from "socket.io-client";
 import type { ChatMessage } from "../types/chatMessage";
 const config = useRuntimeConfig();

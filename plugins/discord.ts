@@ -1,3 +1,5 @@
+//TODO Figure out, what are the use cases for plugins
+
 export default defineNuxtPlugin(() => {
   return {
     provide: {
