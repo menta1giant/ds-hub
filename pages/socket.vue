@@ -1,17 +1,18 @@
 <script setup lang="ts">
 //TODO Refactor component
 
+import { storeToRefs } from "pinia";
 import { io } from "socket.io-client";
 import type { ChatMessage } from "../types/chatMessage";
 const config = useRuntimeConfig();
 const socket = io(config.public.SOCKETS);
 const userDataStore = useUserData();
+const { userData } = userDataStore;
 
 const input = ref();
 const messages = ref<ChatMessage[]>([]);
 
 const onClick = () => {
-  const userData = userDataStore.$state.userData;
   if (!userData.name) return;
 
   const message = {
