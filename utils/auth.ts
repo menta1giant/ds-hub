@@ -2,7 +2,7 @@ function setAuthToken(token: string) {
   setCookie("authToken", token, 30);
 }
 
-function getAuthToken() {
+export function getAuthToken() {
   return getCookie("authToken");
 }
 
@@ -12,7 +12,7 @@ export function isAuthenticationTokenAssigned() {
 
 export async function setUserData() {
   const userDataStore = useUserData();
-  const userData:User = await DiscordRepo.getUserData();
+  const userData: User = await DiscordRepo.getUserData();
 
   userDataStore.setUserData(formatUserData(userData));
 }

@@ -1,11 +1,8 @@
 <script setup lang="ts">
-//TODO Refactor component
+// TODO Refactor component
 
-import { storeToRefs } from "pinia";
-import { io } from "socket.io-client";
 import type { ChatMessage } from "../types/chatMessage";
-const config = useRuntimeConfig();
-const socket = io(config.public.SOCKETS);
+const { $socket } = useNuxtApp() as any;
 const userDataStore = useUserData();
 const { userData } = userDataStore;
 
@@ -26,10 +23,10 @@ const onClick = () => {
 
   messages.value.push(message);
 
-  socket.emit("send-message", message);
+  $socket.emit("send-message", message);
 };
 
-socket.on("broadcast-message", (message) => {
+$socket.on("broadcast-message", (message: ChatMessage) => {
   messages.value.push(Object.assign({}, message, { isMe: false }));
 });
 </script>

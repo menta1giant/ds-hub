@@ -23,8 +23,21 @@ export const getAuthLink = (redirectUri: string) => {
   );
 };
 
+export const $discordFetch = (url: string) => {
+  const token = getAuthToken();
+  const fetch = token
+    ? $fetch.create({
+        baseURL: "https://discord.com/api",
+        headers: {
+          Authorization: token,
+        },
+      })
+    : $fetch;
+  return fetch(url);
+};
+
 export const DiscordRepo = {
-  async getUserData():User {
-    return await useDiscordFetch()("/users/@me");
+  async getUserData(): User {
+    return await $discordFetch("/users/@me");
   },
 };
