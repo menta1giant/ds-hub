@@ -23,7 +23,7 @@ export const getAuthLink = (redirectUri: string) => {
   );
 };
 
-export const $discordFetch = (url: string) => {
+export const $discordFetch = (url: string, ...rest: any[]) => {
   const token = getAuthToken();
   const fetch = token
     ? $fetch.create({
@@ -33,7 +33,7 @@ export const $discordFetch = (url: string) => {
         },
       })
     : $fetch;
-  return fetch(url);
+  return fetch(url, ...rest);
 };
 
 export const DiscordRepo = {

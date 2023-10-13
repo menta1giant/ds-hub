@@ -1,13 +1,17 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
-const data = ref<{ username?: string }>({});
 
 onMounted(async () => {
-  await AuthRepo.discordAuth(route.query.code as string);
+  if (!route.query.code) useHandleFailedAuth();
+
+  try {
+    await AuthRepo.discordAuth(route.query.code as string);
+  } catch (e) {
+    useHandleFailedAuth();
+  }
 
   const userData = (await DiscordRepo.getUserData()) as Object;
-  data.value = userData;
 
   const userDataStore = useUserData();
   userDataStore.setUserData(formatUserData(userData as User));
@@ -15,7 +19,3 @@ onMounted(async () => {
   router.push("/socket");
 });
 </script>
-
-<template>
-  <div>{{ data?.username }}</div>
-</template>

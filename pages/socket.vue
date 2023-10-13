@@ -1,15 +1,13 @@
 <script setup lang="ts">
 // TODO Refactor component
 
-import type { ChatMessage } from "../types/chatMessage";
-const { $socket } = useNuxtApp() as any;
-const userDataStore = useUserData();
-const { userData } = userDataStore;
+const { $socket } = useNuxtApp();
+const { userData } = useUserData();
 
 const input = ref();
 const messages = ref<ChatMessage[]>([]);
 
-const onClick = () => {
+const handleSendMessage = () => {
   if (!userData.name) return;
 
   const message = {
@@ -27,7 +25,7 @@ const onClick = () => {
 };
 
 $socket.on("broadcast-message", (message: ChatMessage) => {
-  messages.value.push(Object.assign({}, message, { isMe: false }));
+  messages.value.push({ ...message, isMe: false });
 });
 </script>
 
@@ -36,7 +34,7 @@ $socket.on("broadcast-message", (message: ChatMessage) => {
     <div class="messages">
       <ChatMessage
         v-for="message in messages"
-        :key="generateRandomString(message.name)"
+        :key="generateRandomHashString(message.name)"
         v-bind="{ ...message }"
       ></ChatMessage>
     </div>
@@ -47,7 +45,7 @@ $socket.on("broadcast-message", (message: ChatMessage) => {
         type="text"
         placeholder="Type your message..."
       />
-      <button id="send-button" @click="onClick">Send</button>
+      <button id="send-button" @click="handleSendMessage">Send</button>
     </div>
   </div>
 </template>

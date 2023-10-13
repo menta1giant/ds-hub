@@ -1,4 +1,4 @@
-const discordFetchUserDataUrl = "https://discord.com/api/oauth2/token";
+const DISCORD_FETCH_USER_DATA_URL = "https://discord.com/api/oauth2/token";
 
 const getDiscordUserInfoFetchParams = (code: string) => {
   const config = useRuntimeConfig();
@@ -7,10 +7,7 @@ const getDiscordUserInfoFetchParams = (code: string) => {
   formdata.append("client_secret", config.SECRET_CODE);
   formdata.append("grant_type", "authorization_code");
   formdata.append("code", code);
-  formdata.append(
-    "redirect_uri",
-    encodeURI(config.public.REDIRECT_URL as string),
-  );
+  formdata.append("redirect_uri", encodeURI(config.public.REDIRECT_URL));
 
   return formdata;
 };
@@ -19,10 +16,10 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   const params = getDiscordUserInfoFetchParams(String(query.code));
 
-  const data = await $fetch(discordFetchUserDataUrl, {
+  const data = await $fetch(DISCORD_FETCH_USER_DATA_URL, {
     method: "POST",
     body: params,
-  }).catch((error) => error.data);
+  });
 
   return data;
 });
