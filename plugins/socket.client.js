@@ -1,7 +1,7 @@
 import io from 'socket.io-client'
 
 export default defineNuxtPlugin(() => {
-    const socket = io('http://localhost:443')
+    const socket = io('https://localhost:443')
 
     return {
         provide: {
