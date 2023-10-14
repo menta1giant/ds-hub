@@ -1,0 +1,31 @@
+datasource db {
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_DIRECT_URL")
+  provider  = "postgresql"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+model SiteUser {
+  id      Int    @id @default(autoincrement())
+  name    String
+  Event   Event? @relation(fields: [eventId], references: [id])
+  eventId Int?
+}
+
+model Host {
+  id    Int     @id
+  name  String
+  Event Event[]
+}
+
+model Event {
+  id          Int        @id
+  host        Host       @relation(fields: [hostId], references: [id])
+  title       String
+  description String?
+  hostId      Int
+  players     SiteUser[]
+}
