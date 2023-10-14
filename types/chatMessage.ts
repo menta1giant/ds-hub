@@ -1,6 +1,4 @@
 export interface ChatMessage {
-  name: string;
-  avatar: string;
+  author: User;
   message: string;
-  isMe: boolean;
 }

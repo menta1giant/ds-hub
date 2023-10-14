@@ -11,11 +11,13 @@ onMounted(async () => {
     useHandleFailedAuth();
   }
 
-  const userData = (await DiscordRepo.getUserData()) as Object;
+  const userData = (await DiscordRepo.getUserData()) as User;
 
   const userDataStore = useUserData();
-  userDataStore.setUserData(formatUserData(userData as User));
+  userDataStore.setUserData(formatUserData(userData));
 
   router.push("/socket");
 });
 </script>
+
+<template></template>

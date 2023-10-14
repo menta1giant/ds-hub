@@ -2,15 +2,18 @@
 import type { ChatMessage } from "../types/chatMessage";
 
 const props = defineProps<ChatMessage>();
+const { userData } = useUserData();
+
+const isMe = computed(() => userData.id === props.author.id);
 </script>
 
 <template>
-  <div class="message" :class="{ 'message--sent': props.isMe }">
+  <div class="message" :class="{ 'message--sent': isMe }">
     <div>
-      <span class="message__name">{{ props.name }}</span>
+      <span class="message__name">{{ props.author.name }}</span>
       <p>{{ props.message }}</p>
     </div>
-    <img :src="props.avatar" width="64" height="64" />
+    <img :src="props.author.avatar" width="64" height="64" />
   </div>
 </template>
 

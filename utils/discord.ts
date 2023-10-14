@@ -1,15 +1,17 @@
-export function formatUserData(userData: {
+export function formatUserData({global_name, username, avatar, id}: {
+  global_name: string;
   username: string;
   avatar: string;
   id: string;
-}) {
+}):User {
   return {
-    name: userData.username,
-    avatar: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
+    id,
+    name: global_name || username,
+    avatar: `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`,
   };
 }
 
-export const getAuthLink = (redirectUri: string) => {
+export const getAuthLink = (redirectUri: string):string => {
   const props = {
     client_id: "1161273721026261115",
     redirect_uri: redirectUri,
@@ -37,7 +39,7 @@ export const $discordFetch = (url: string, ...rest: any[]) => {
 };
 
 export const DiscordRepo = {
-  async getUserData(): User {
+  async getUserData(): Promise<User | void> {
     return await $discordFetch("/users/@me");
   },
 };

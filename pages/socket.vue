@@ -7,13 +7,13 @@ const { userData } = useUserData();
 const input = ref();
 const messages = ref<ChatMessage[]>([]);
 
-const handleSendMessage = () => {
-  if (!userData.name) return;
+console.log(userData);
 
-  const message = {
-    name: userData.name,
-    avatar: userData.avatar,
-    isMe: true,
+const handleSendMessage = () => {
+  if (!userData.id) return;
+
+  const message:ChatMessage = {
+    author: userData,
     message: input.value.value,
   };
 
@@ -25,8 +25,14 @@ const handleSendMessage = () => {
 };
 
 $socket.on("broadcast-message", (message: ChatMessage) => {
-  messages.value.push({ ...message, isMe: false });
+  messages.value.push(message);
 });
+
+onMounted(async () => {
+  const messagesList:ChatMessage[] = await $fetch("/api/message").then(data => data.map((message:{author:{id:string};content:string}) => ({message: message.content, author: message.author})))
+  console.log(messagesList);
+  messages.value.push(...messagesList);
+})
 </script>
 
 <template>

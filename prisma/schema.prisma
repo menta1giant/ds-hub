@@ -5,14 +5,16 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model SiteUser {
-  id      Int    @id @default(autoincrement())
-  name    String
-  Event   Event? @relation(fields: [eventId], references: [id])
-  eventId Int?
+  id       String    @id
+  name     String
+  Event    Event?    @relation(fields: [eventId], references: [id])
+  eventId  Int?
+  messages Message[]
+  avatar   String
 }
 
 model Host {
@@ -28,4 +30,11 @@ model Event {
   description String?
   hostId      Int
   players     SiteUser[]
+}
+
+model Message {
+  id       Int      @id @default(autoincrement())
+  content  String
+  author   SiteUser @relation(fields: [authorId], references: [id])
+  authorId String
 }
