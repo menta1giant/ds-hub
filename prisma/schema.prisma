@@ -8,6 +8,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model HostType {
+  type String @unique
+  Host Host[]
+}
+
 model SiteUser {
   id       String    @id
   name     String
@@ -18,9 +23,11 @@ model SiteUser {
 }
 
 model Host {
-  id     String  @id
-  name   String
-  events Event[]
+  id       String   @id
+  name     String
+  type     HostType @relation(fields: [hostType], references: [type])
+  hostType String @default("Discord")
+  events   Event[]
 }
 
 model Event {

@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import type { User } from "../../types/user";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
@@ -7,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
 
-  const { id, avatar, name } = body.author as User;
+  const { id, avatar, name } = body.author;
 
   await prisma.siteUser.upsert({
     where: {

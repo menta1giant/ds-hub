@@ -17,11 +17,13 @@ const handleAddEvent = () => {
       Authorization: "chagabum",
     },
     body: {
-      id: "12345",
-      title: title.value.value,
-      date: new Date().toISOString(),
-      hostId: "123",
-      description: description.value.value,
+      event: {
+        id: "12345",
+        name: title.value.value,
+        scheduledStartTimestamp: new Date().toISOString(),
+        guildId: "123",
+        description: description.value.value,
+      },
     },
   });
 };

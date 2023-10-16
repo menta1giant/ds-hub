@@ -34,9 +34,11 @@ export const $discordFetch = (url: string, ...rest: any[]) => {
   const token = getAuthToken();
   const fetch = token
     ? $fetch.create({
-        baseURL: "https://discord.com/api",
-        headers: {
-          Authorization: token,
+        onRequest({ options }) {
+          options.baseURL = "https://discord.com/api";
+          options.headers = {
+            Authorization: token,
+          };
         },
       })
     : $fetch;

@@ -6,7 +6,13 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
 
-  const { id, title, description, hostId, date } = body;
+  const {
+    name: title,
+    guildId: hostId,
+    scheduledStartTimestamp: date,
+    description,
+    id,
+  } = body.event;
   console.log(body);
 
   return prisma.event.create({
