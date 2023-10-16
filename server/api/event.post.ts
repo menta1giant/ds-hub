@@ -6,12 +6,16 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
 
+  const { id, title, description, hostId, date } = body;
+  console.log(body);
+
   return prisma.event.create({
     data: {
-      id: Math.floor(Math.random() * 10000),
-      hostId: 123,
-      title: body.title,
-      description: body.description,
+      discordId: id,
+      hostId,
+      title,
+      description,
+      date: new Date(date).toISOString(),
     },
   });
 });

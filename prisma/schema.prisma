@@ -18,18 +18,20 @@ model SiteUser {
 }
 
 model Host {
-  id    Int     @id
-  name  String
-  Event Event[]
+  id     String  @id
+  name   String
+  events Event[]
 }
 
 model Event {
-  id          Int        @id
+  id          Int        @id @default(autoincrement())
+  discordId   String
   host        Host       @relation(fields: [hostId], references: [id])
   title       String
   description String?
-  hostId      Int
+  hostId      String
   players     SiteUser[]
+  date        DateTime   @default(now()) @db.Timestamptz(3)
 }
 
 model Message {
