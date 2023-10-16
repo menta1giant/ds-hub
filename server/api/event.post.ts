@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
   protectRoute(event);
 
   const body = await readBody(event);
+  console.log(body);
 
   const {
     name: title,
@@ -13,7 +14,6 @@ export default defineEventHandler(async (event) => {
     description,
     id,
   } = body.event;
-  console.log(body);
 
   return prisma.event.create({
     data: {
