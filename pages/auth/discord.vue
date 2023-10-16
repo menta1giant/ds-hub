@@ -20,4 +20,6 @@ onMounted(async () => {
 });
 </script>
 
-<template></template>
+<template>
+  <main></main>
+</template>

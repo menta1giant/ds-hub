@@ -1,9 +1,14 @@
-export function formatUserData({global_name, username, avatar, id}: {
+export function formatUserData({
+  global_name,
+  username,
+  avatar,
+  id,
+}: {
   global_name: string;
   username: string;
   avatar: string;
   id: string;
-}):User {
+}): User {
   return {
     id,
     name: global_name || username,
@@ -11,7 +16,7 @@ export function formatUserData({global_name, username, avatar, id}: {
   };
 }
 
-export const getAuthLink = (redirectUri: string):string => {
+export const getAuthLink = (redirectUri: string): string => {
   const props = {
     client_id: "1161273721026261115",
     redirect_uri: redirectUri,

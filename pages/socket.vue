@@ -7,12 +7,10 @@ const { userData } = useUserData();
 const input = ref();
 const messages = ref<ChatMessage[]>([]);
 
-console.log(userData);
-
 const handleSendMessage = () => {
   if (!userData.id) return;
 
-  const message:ChatMessage = {
+  const message: ChatMessage = {
     author: userData,
     message: input.value.value,
   };
@@ -29,10 +27,16 @@ $socket.on("broadcast-message", (message: ChatMessage) => {
 });
 
 onMounted(async () => {
-  const messagesList:ChatMessage[] = await $fetch("/api/message").then(data => data.map((message:{author:{id:string};content:string}) => ({message: message.content, author: message.author})))
-  console.log(messagesList);
+  const messagesList: ChatMessage[] = await $fetch("/api/message").then(
+    (data) =>
+      data.map((message: { author: { id: string }; content: string }) => ({
+        message: message.content,
+        author: message.author,
+      })),
+  );
+
   messages.value.push(...messagesList);
-})
+});
 </script>
 
 <template>
@@ -58,7 +62,8 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .chat-container {
-  width: 60vw;
+  min-width: 18rem;
+  max-width: 64rem;
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 5px;

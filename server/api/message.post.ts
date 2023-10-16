@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import type { User } from '../../types/user';
+import type { User } from "../../types/user";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
@@ -7,30 +7,28 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
 
-  console.log(body);
+  const { id, avatar, name } = body.author as User;
 
-  const {id, avatar, name} = body.author as User
-
-  const siteUser = await prisma.siteUser.upsert({
+  await prisma.siteUser.upsert({
     where: {
-      id: id
+      id,
     },
     update: {
-      id: id,
-      avatar: avatar,
-      name: name
+      id,
+      avatar,
+      name,
     },
     create: {
-      id: id,
-      avatar: avatar,
-      name: name
+      id,
+      avatar,
+      name,
     },
   });
 
   return prisma.message.create({
     data: {
       content: body.message,
-      authorId: id
+      authorId: id,
     },
   });
 });

@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     try {
       await setUserData();
-    } catch(e) {
+    } catch (e) {
       return navigateTo("/login");
     }
   }
